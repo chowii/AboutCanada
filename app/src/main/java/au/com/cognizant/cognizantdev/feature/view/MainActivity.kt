@@ -9,6 +9,7 @@ import au.com.cognizant.cognizantdev.R
 import au.com.cognizant.cognizantdev.feature.adapter.AboutCanadaAdapter
 import au.com.cognizant.cognizantdev.feature.model.AboutCanada
 import au.com.cognizant.cognizantdev.feature.model.Fact
+import au.com.cognizant.cognizantdev.network.ApiClient
 import butterknife.BindView
 import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,7 +40,7 @@ class MainActivity : Activity(), MainContract.MainInteractable {
         setActionBar(toolbar)
         configureRecyclerView()
 
-        //TODO: create presenter presenter = MainPresenter()
+        presenter = MainPresenter(this, savedState, ApiClient.getService())
         presenter.startPresenting()
         swipeRefreshLayout.setOnRefreshListener { presenter.refreshDataSet() }
     }
@@ -55,6 +56,7 @@ class MainActivity : Activity(), MainContract.MainInteractable {
         val restoreState = savedInstanceState?.get(ABOUT_CANADA_STATE_KEY) as AboutCanada?
         restoreState?.let {
             toolbar.title = it.title
+            aboutCanadaAdapter.updateDataset(it.facts)
         }
     }
 
@@ -73,7 +75,10 @@ class MainActivity : Activity(), MainContract.MainInteractable {
     }
 
     override fun updateDataset(facts: MutableList<Fact>) {
-        //Todo update and notify dataset
+        aboutCanadaAdapter.apply {
+            updateDataset(facts)
+            notifyDataSetChanged()
+        }
     }
     override fun showLoading() {
         swipeRefreshLayout.isRefreshing = true
