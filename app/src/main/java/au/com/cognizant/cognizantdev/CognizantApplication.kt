@@ -1,6 +1,7 @@
-package au.com.cognizant.cognizantdev.network
+package au.com.cognizant.cognizantdev
 
 import android.app.Application
+import au.com.cognizant.cognizantdev.network.Constants
 
 class CognizantApplication: Application() {
 
