@@ -9,6 +9,7 @@ import au.com.cognizant.cognizantdev.R
 import au.com.cognizant.cognizantdev.feature.adapter.AboutCanadaAdapter
 import au.com.cognizant.cognizantdev.feature.model.AboutCanada
 import au.com.cognizant.cognizantdev.feature.model.Fact
+import au.com.cognizant.cognizantdev.feature.presenter.MainPresenter
 import au.com.cognizant.cognizantdev.network.ApiClient
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : Activity(), MainContract.MainInteractable {
 
     companion object {
-        private val ABOUT_CANADA_STATE_KEY = this.javaClass.`package`.name + ".canada"
+        private val ABOUT_CANADA_STATE_KEY = this::class.java.`package`.name + ".canada"
     }
 
     @BindView(R.id.toolbar)
@@ -28,7 +29,6 @@ class MainActivity : Activity(), MainContract.MainInteractable {
 
     private val aboutCanadaAdapter = AboutCanadaAdapter()
     private lateinit var presenter: MainPresenter
-
     private lateinit var saveDataSetState: AboutCanada
 
     override fun onCreate(savedInstanceState: Bundle?) {

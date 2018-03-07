@@ -1,7 +1,8 @@
-package au.com.cognizant.cognizantdev.feature.view
+package au.com.cognizant.cognizantdev.feature.presenter
 
 import android.util.Log
 import au.com.cognizant.cognizantdev.feature.model.AboutCanada
+import au.com.cognizant.cognizantdev.feature.view.MainContract
 import au.com.cognizant.cognizantdev.network.CognizantService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
